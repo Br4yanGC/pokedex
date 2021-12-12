@@ -18,7 +18,7 @@
   </ion-header>
 
   <ion-grid *ngIf="pokemon">
-    <img src={{pokemon.src_img}}>
+    <img *ngIf="pokemon.src_img" [src]="getPictureUrl(pokemon.src_img)">
     <ion-row class="ion-justify-content-center"><ion-col size=auto><h2>Height</h2></ion-col></ion-row>
     <ion-row class="ion-justify-content-center"><ion-col size=auto>{{pokemon.height}}</ion-col></ion-row>
     <ion-row class="ion-justify-content-center"><ion-col size=auto><h2>Category</h2></ion-col></ion-row>

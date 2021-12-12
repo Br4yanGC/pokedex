@@ -25,4 +25,14 @@ export class PokemonsPage implements OnInit {
     })
   }
 
+  getPictureUrl(src_img){
+    if(src_img.includes("http://") || src_img.includes("https://")){
+      return src_img;
+    }
+    else{
+      return 'http://localhost:3000/' + src_img;
+    }
+  }
+
+
 }

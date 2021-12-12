@@ -4,7 +4,10 @@ var app = express();
 var mysql = require('mysql');
 var cors = require('cors');
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: "50mb"}));
+
+var picturesDirectory = "figures/";
+var fs = require('fs');
 
 const port = 3000;
 
@@ -173,6 +176,20 @@ app.delete('/pokemons/:id', function(req, res){
         connection.end();
     });
 });
+
+app.post('/figures', function(req, res){
+    // console.log(req.body.picture);
+    // res.send("ok")
+    var fileName = `${new Date().getTime()}.jpeg`;
+    var picture_url = `${picturesDirectory}${fileName}`;
+
+    fs.writeFile(`${picture_url}`, req.body.picture, 'base64', function(error){
+        if (error) throw error;
+        res.send({src_img: picture_url})
+    })
+})
+
+app.use('/figures', express.static('figures'));
 
 app.listen(3000, function(){
   console.log("Server started in port 3000!!!")

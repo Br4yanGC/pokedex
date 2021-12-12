@@ -19,7 +19,7 @@
   <ion-list>
     <ion-item *ngFor="let pokemon of pokemons" [routerLink]="['/pokemons/view', pokemon.id]">
       <ion-avatar slot="start">
-        <img src={{pokemon.src_img}}>
+        <img *ngIf="pokemon.src_img" [src]="getPictureUrl(pokemon.src_img)">
       </ion-avatar>
       <ion-label>
         <h2>{{pokemon.name}}</h2>
